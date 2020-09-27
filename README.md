@@ -54,6 +54,7 @@ http://localhost:8001/api/stores
 - JSON for Shopify And WooCommerce Product list > blackcart/resources/json
 - StoresTest.php > blackcart/tests/Unit/StoresTest.php
 - API Routes > blackcart/routes/api.php
+- DB migration > blackcart/database/migrations/2020_09_26_211325_stores.php
 
 
 <b>Please refer API Documentation and Screenshots folder more details. </b>
