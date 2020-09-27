@@ -58,6 +58,9 @@ http://localhost:8001/api/stores
 
 <b>Please refer API Documentation and Screenshots folder more details. </b>
 
+- **[API Doc](https://github.com/jhalak04/blackcart/blob/master/API%20Documentation.docx)**
+- **[Screenshots](https://github.com/jhalak04/blackcart/tree/master/ScreenShots)**
+
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
