@@ -17,8 +17,8 @@ composer create-project --prefer-dist laravel/laravel blog
 ```
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
-DB_PORT=13306
-DB_DATABASE=stat_rest_api
+DB_PORT=3306
+DB_DATABASE=blackcart
 DB_USERNAME=add_db_user_name
 DB_PASSWORD=add_db_password
 ```
