@@ -25,11 +25,10 @@ class Stores extends Model
             foreach ($products['variants'] as $variants) {
                 $prodVariants[$products['id']][] = [
                     'color' => ($variants['option1']) ?? "",
-                    'size' => ($variants['size']) ?? "",
                     'quantity' => ($variants['inventory_quantity']) ?? "",
                     'weight' => ($variants['weight']) ?? "",
                     'price' => ($variants['price']) ?? "",
-
+                    'size' => ($variants['size']) ?? "",
                 ];
             }
             $productList[] = [
@@ -48,14 +47,21 @@ class Stores extends Model
     public function woocommerce($productDetails) {
         $productList = [];
         $prodVariants = [];
+
         foreach ($productDetails as $products) {
             $attributes = (empty($products['attributes'])) ? $products['default_attributes'] : $products['attributes'];
             foreach ($attributes as $attr) {
-                $prodVariants[$products['id']][$attr['name']] = ($attr['options']) ?? $attr['option'];
+                if (isset($attr['options'])) {
+                    $prodVariants[$products['id']][] =  $this->x($attr['options'], $products);
+                } else {
+                    $keyName = ($attr['name'] == 'Color') ? 'color' : 'size';
+                    $newOptns[$keyName] = $attr['option'];
+                    $newOptns['quantity'] = ($products['stock_status']) ?? "";
+                    $newOptns['weight'] = ($products['weight']) ?? "";
+                    $newOptns['price'] = ($products['price']) ?? "";
+                    $prodVariants[$products['id']] = [$newOptns];
+                }
             }
-            $prodVariants[$products['id']]['quantity'] = ($products['stock_status']) ?? "";
-            $prodVariants[$products['id']]['weight'] = ($products['weight']) ?? "";
-            $prodVariants[$products['id']]['price'] = ($products['price']) ?? "";
             $productList[] = [
                 'productId' => $products['id'],
                 'name' => $products['name'],
@@ -63,5 +69,17 @@ class Stores extends Model
             ];
         }
         return $productList;
+    }
+
+    private function x($options, $products) {
+        $newOptns = [];
+        foreach ($options as $key => $nOpt) {
+            $keyName = ($key == 'Color') ? 'color' : 'size';
+            $newOptns[$keyName] = $nOpt;
+            $newOptns['quantity'] = ($products['stock_status']) ?? "";
+            $newOptns['weight'] = ($products['weight']) ?? "";
+            $newOptns['price'] = ($products['price']) ?? "";
+        }
+        return $newOptns;
     }
 }
